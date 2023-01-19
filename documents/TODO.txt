@@ -1,0 +1,4 @@
+TODO: 
+    Test PCA augmentations changes.
+        - Initial covariance/eigenvector/value calculations.
+        - Application at training/prediction.

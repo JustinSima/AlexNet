@@ -1,0 +1,4 @@
+- pillow
+- tensorflow
+    - pip:
+        -tensorflow-addons

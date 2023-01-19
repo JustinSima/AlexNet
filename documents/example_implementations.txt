@@ -1,0 +1,34 @@
+"""Driver."""
+import os
+
+from AlexNet import AlexNet
+
+data_path = '/Users/justinsima/dir/implementations/datasets/ImageNet/dummy_data'
+label_path = os.path.join(data_path, 'labels.json')
+label_encoding = os.path.join(data_path, 'label_encodings.json')
+
+model = AlexNet(data_path, label_path, label_encoding)
+model.fit(epochs=3)
+
+test_image = '/Users/justinsima/dir/implementations/datasets/ImageNet/dummy_data/test/ILSVRC2012_test_00018560.JPEG'
+pred = model.predict(test_image)
+print(pred)
+
+from utilities.data_generator import ImageNetDataGenerator
+datagen = ImageNetDataGenerator(
+    image_directory=data_path,
+    label_path=label_path,
+    label_encoding_path=label_encoding
+)
+print(datagen.__getitem__(0)[0].shape)
+
+from utilities.pca_augmentation import calculate_pca_constants
+eig_values, eig_vectors, rgb_means = calculate_pca_constants(data_path,
+    [
+        'n07579787_13703_n07579787.JPEG',
+        'n15075141_13200_n15075141.JPEG',
+        'n15075141_13222_n15075141.JPEG'
+    ]
+)
+
+print(eig_values, eig_vectors, rgb_means)
